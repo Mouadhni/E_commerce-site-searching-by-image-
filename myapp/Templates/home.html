@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">Categories:</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {% for categorie in  categories %}
+        <li class="nav-item">
+          <a class="nav-link category-link" aria-current="page" href="#" data-id="{{ categorie.id }}">{{ categorie.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Right-aligned search form -->
+   <form class="d-flex ms-auto mb-3" id="searchForm">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+  </div>
+</nav>
+<div class="product-section row row-cols-1 row-cols-md-3 g-4">
+    {% for product in products %}
+    <div class="col position-relative">
+        <div class="card h-100 shadow-sm" data-category="{{ product.category.id }}" data-name="{{ product.name | lower }}">
+            <!-- Rest of your card content -->
+            <img src="{{ product.image_url }}" class="card-img-top" alt="Product Image">
+            <div class="card-body position-absolute bottom-0 start-0 bg-white p-3" style="box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 5px;">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text">{{ product.price }}$</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Event handler for category links
+        $('.category-link').click(function(event) {
+            event.preventDefault();
+            const categoryId = $(this).data('id');
+
+            // Hide all products
+            $('.card').hide();
+
+            // Show products that match the selected category
+            $(`.card[data-category="${categoryId}"]`).show();
+        });
+
+        // Event handler for search form submission
+        $('#searchForm').submit(function(event) {
+            event.preventDefault();
+            const searchValue = $('#searchInput').val().toLowerCase();
+
+            // Hide all products
+            $('.card').hide();
+
+            // Show products that match or contain the search value in their names
+            $(`.card[data-name*="${searchValue}"]`).show();
+        });
+    });
+</script>
+
+<style>/* CSS for category links */
+.category-link {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+  .product-section {
+            margin-top: 20px;
+            margin-bottom: 20px; /* Adjust the margin-top as needed */
+        }
+
+/* Hover effect */
+.category-link:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Click effect */
+.category-link:active {
+    transform: translateY(2px);
+}
+</style>
+</div>
+
+
+
+
+
+</html>
+{% endblock content %}

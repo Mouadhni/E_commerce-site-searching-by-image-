@@ -1,0 +1,73 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+       <a class="navbar-brand" href="{% url 'about' %}">
+  <img src="{% static 'static_images/logo.jpeg' %}" alt="Your Logo" height="50" style="border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+</a>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'by_image' %}">search by image </a>
+        </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="{% url 'form' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Sell a product
+          </a>
+
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+      </ul>
+
+<div class="information-tab">
+  <h4>Contact Information</h4>
+   <ul>
+    <li>Email: mouadhnika6@gmail.com</li>
+    <li>Phone: +212648-492543</li>
+    <li>
+      LinkedIn: <a href="https://www.linkedin.com/in/hnika-mouad-0b23a5200/">My LinkedIn Profile</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </div>
+</nav>
+<style>.information-tab {
+  font-size: 8px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 3px;
+  background-color: #f9f9f9;
+  margin-top:3px;
+}
+
+.information-tab h4 {
+  font-size: 8px;
+  margin-bottom: 1.5px;
+}
+
+.information-tab ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.information-tab li {
+  margin-bottom: 1.5px;
+}
+
+.information-tab a {
+  text-decoration: none;
+  color: #007bff; /* Change to your preferred link color */
+}
+</style>

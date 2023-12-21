@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <style>
+   .card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      font-size: 0.875rem;
+      color: #555;
+    }
+
+    /* Adjustments to the product-section layout */
+    .product-section {
+      margin-top: 20px;
+    }
+
+    .product-section .col {
+      margin-bottom: 20px;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #343a40;
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .center-button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .upload-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .custom-button {
+      background-image: url("https://th.bing.com/th/id/OIP.46yio72t7rDws0of3wGkhwHaHa?rs=1&pid=ImgDetMain");
+      color: #3cbad7;
+      border: none;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .custom-button:hover {
+      transform: scale(1.1);
+      box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    input[type='file'] {
+      display: none;
+    }
+
+    /* Style the submit button */
+    input[type='submit'] {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type='submit']:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <div class="center-button">
+
+  <div class="center-button">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="upload-container">
+        <label for="file-upload" class="custom-button">
+          Upload a photo
+        </label>
+        <input id="file-upload" type="file" name="photo" >
+      </div>
+      <div class="upload-container">
+        <!-- Checking if a photo is uploaded, if not, change the submit button text -->
+          <input type="submit" value="Submit">
+
+      </div>
+    </form>
+  </div>
+  </div>
+
+
+ <div class="product-section row row-cols-1 row-cols-md-3 g-4">
+    {% for file in similar_files %}
+      <div class="col position-relative">
+        <div class="card h-100 shadow-sm">
+          <img src="{% static file %}" alt="Your Image" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Product Name</h5>
+            <p class="card-text">Description of the product goes here.</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
